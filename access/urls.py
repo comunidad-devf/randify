@@ -1,12 +1,12 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from access import views as access_views
+
 urlpatterns = [
     # Examples:
     # url(r'^$', 'randify.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', 'landing.views.index', name='landing'),
-    url(r'^auth/', include('access.urls', namespace='access')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^uber/$', access_views.uber_handler, name='uber')
 ]
