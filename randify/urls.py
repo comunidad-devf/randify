@@ -6,5 +6,6 @@ urlpatterns = [
     # url(r'^$', 'randify.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^$', 'landing.views.index', name='landing'),
     url(r'^admin/', include(admin.site.urls)),
 ]
