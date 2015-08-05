@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 
 import requests
 
+from access.models import User
+
 
 def uber_handler(request):
     if not 'code' in request.GET:
@@ -28,11 +30,14 @@ def uber_handler(request):
     
     json_response = response.json()
 
-    return redirect(
-        "{base_url}?access_token={access_token}&type={token_type}&scope={scope}".format(**{
-            'base_url': '/',
-            'access_token': json_response.get('access_token'),
-            'scope': json_response.get('scope'),
-            'token_type': json_response.get('token_type')
-        })
-    )
+    user, created = User.create_from_uber(**json_response)
+
+    return redirect(reverse('users:profile', kwargs={'user_id': user.id}))
+    # return redirect(
+    #     "{base_url}?access_token={access_token}&type={token_type}&scope={scope}".format(**{
+    #         'base_url': '/',
+    #         'access_token': json_response.get('access_token'),
+    #         'scope': json_response.get('scope'),
+    #         'token_type': json_response.get('token_type')
+    #     })
+    # )

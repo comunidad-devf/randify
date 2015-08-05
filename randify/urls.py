@@ -8,5 +8,6 @@ urlpatterns = [
 
     url(r'^$', 'landing.views.index', name='landing'),
     url(r'^auth/', include('access.urls', namespace='access')),
+    url(r'^users/', include('users.urls', namespace='users')),
     url(r'^admin/', include(admin.site.urls)),
 ]
